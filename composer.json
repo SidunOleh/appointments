@@ -1,0 +1,14 @@
+{
+    "require": {
+        "illuminate/database": "^10.28",
+        "illuminate/pagination": "^10.28",
+        "illuminate/events": "^10.31",
+        "google/apiclient": "^2.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "Appointments\\": "src/app"
+        },
+        "files": ["src/app/utils.php"]
+    }
+}

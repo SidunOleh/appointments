@@ -1,0 +1,181 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Appointments\n"
+"POT-Creation-Date: 2023-11-13 02:38+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sidun Oleh <sidunoleh@gmail.com>\n"
+"Language-Team: Bazar\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_attr_e;esc_html__;esc_html_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: app/Controllers/Actions/ActionsController.php:19
+#: app/Controllers/Api/AppointmentsController.php:19
+#: app/Controllers/Api/ServicesController.php:175
+#: app/Controllers/Api/ServicesController.php:195
+msgid "Service not found."
+msgstr "Сервис не найден."
+
+#: app/Controllers/Api/AppointmentsController.php:27
+#: app/Controllers/Api/ProvidersController.php:135
+#: app/Controllers/Api/ProvidersController.php:153
+#: app/Controllers/Api/WorkingDaysController.php:42
+msgid "Provider not found."
+msgstr "Провайдер не найден."
+
+#: app/Controllers/Api/AppointmentsController.php:31
+msgid "Service has not passed provider."
+msgstr "У Сервиса нет указанного провайдера."
+
+#: app/Controllers/Api/AppointmentsController.php:41
+#: app/Controllers/Api/WorkingDaysController.php:34
+msgid "Date is invalid."
+msgstr "Дата недействительна.."
+
+#: app/Controllers/Api/AppointmentsController.php:46
+msgid "Date is not available."
+msgstr "Дата недоступна."
+
+#: app/Controllers/Api/AppointmentsController.php:55
+msgid "Hour is invalid."
+msgstr "Неверный Время."
+
+#: app/Controllers/Api/AppointmentsController.php:61
+msgid "Hour is not available."
+msgstr "Время недоступен."
+
+#: app/Controllers/Api/AppointmentsController.php:66
+msgid "Hour is reserved."
+msgstr "Время зарезервирован."
+
+#: app/Controllers/Api/AppointmentsController.php:203
+#: app/Controllers/Api/AppointmentsController.php:215
+msgid "Appointment not found."
+msgstr "Встреча не найдена."
+
+#: app/Controllers/Api/ServicesController.php:15
+msgid "Providers are invalid."
+msgstr "Провайдеры недействительны."
+
+#: app/Controllers/Api/ServicesController.php:20
+msgid "Providers not found."
+msgstr "Провайдеры не найдены."
+
+#: app/Controllers/Api/WorkingDaysController.php:16
+#: app/Controllers/Api/WorkingDaysController.php:23
+#: app/Controllers/Api/WorkingHoursController.php:14
+#: app/Controllers/Api/WorkingHoursController.php:21
+msgid "Working hours are invalid."
+msgstr "Рабочее время недействительно."
+
+#: app/Models/Appointment.php:50
+msgid "New appointment"
+msgstr "Новая встреча"
+
+#: app/Pages/MainPage.php:10 app/Pages/MainPage.php:11
+msgid "Appointments"
+msgstr "Встречи"
+
+#: views/admin/emails/new-appointments.php:9
+msgid "Date"
+msgstr "Дата"
+
+#: views/admin/emails/new-appointments.php:13
+msgid "Hour"
+msgstr "Время"
+
+#: views/admin/emails/new-appointments.php:17
+msgid "Service"
+msgstr "Сервис"
+
+#: views/admin/emails/new-appointments.php:21
+msgid "Provider"
+msgstr "Провайдер"
+
+#: views/admin/emails/new-appointments.php:25
+msgid "Name"
+msgstr "Имя"
+
+#: views/admin/emails/new-appointments.php:29
+msgid "E-mail"
+msgstr "E-mail"
+
+#: views/admin/emails/new-appointments.php:33
+msgid "Phone number"
+msgstr "Номер телефона"
+
+#: views/admin/emails/new-appointments.php:38
+msgid "Comment"
+msgstr "Комментарий"
+
+#: views/public/appointment.php:2
+msgid "schedule a consultation"
+msgstr "запланировать консультацию"
+
+#: views/public/appointment.php:67 views/public/appointment.php:92
+#: views/public/appointment.php:178
+msgid "Back to previous step"
+msgstr "Вернуться к предыдущему шагу"
+
+#: views/public/appointment.php:108 views/public/appointment.php:194
+msgid "Welcome to our consultation"
+msgstr "Добро пожаловать на нашу консультацию"
+
+#: views/public/appointment.php:121 views/public/appointment.php:206
+msgid "minutes"
+msgstr "минут"
+
+#: views/public/appointment.php:143
+msgid "Select a date & time"
+msgstr "Выберите дату и время"
+
+#: views/public/appointment.php:151 views/public/appointment.php:164
+msgid "Next step"
+msgstr "Следующий шаг"
+
+#: views/public/appointment.php:225
+msgid "Enter details"
+msgstr "Введите данные"
+
+#: views/public/appointment.php:235
+msgid "Name*"
+msgstr "Имя*"
+
+#: views/public/appointment.php:240
+msgid "Phone number*"
+msgstr "Номер телефона*"
+
+#: views/public/appointment.php:245
+msgid "E-mail*"
+msgstr "E-mail*"
+
+#: views/public/appointment.php:250
+msgid "Please provide your message"
+msgstr "Пожалуйста, укажите ваше сообщение"
+
+#: views/public/appointment.php:254
+msgid "Message"
+msgstr "Сообщение"
+
+#: views/public/appointment.php:259
+msgid "Schedule event"
+msgstr "Запланировать встречу"
+
+#: views/public/appointment.php:271
+msgid "Successfully created. Thank you."
+msgstr "Успешно создано. Спасибо."
+
+msgid "No providers were found."
+msgstr "Провайдеров не обнаружено."
+
+msgid "Choose another service."
+msgstr "Выберите другой сервис."
