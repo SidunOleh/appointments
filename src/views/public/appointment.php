@@ -887,7 +887,7 @@ h6 {
     <?php _e( 'schedule a consultation', 'appointments' ) ?>
 </div>
 
-<div class="appointment-modal__wrapper" style="opacity: 0;">
+<div class="appointment-modal__wrapper">
 
     <div class="appointment-modal__body">
 
