@@ -4,7 +4,7 @@
         <h1 style="margin-top:0px;">Google Calendar</h1>
 
         <label for="service-account-jwt" class="title">
-            Upload service account credentials
+            Upload service account key(JSON)
         </label>
         <Upload
             id="service-account-jwt"
@@ -20,7 +20,7 @@
         </Upload>
 
         <div v-if="service_account_jwt.client_email" style="margin-top:10px;">
-            <span class="title">Uploaded service account</span> 
+            <span class="title">Current service account</span> 
             {{ service_account_jwt.client_email }}
         </div>
     </div>
