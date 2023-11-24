@@ -869,16 +869,44 @@ h6 {
     }
 }
 
-.thank-you__text {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-}
-
 .text {
     font-size: 20px;
     font-weight: 700;
     text-align: center;
+}
+
+.thank-you__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.thank-you__success {
+    margin-bottom: 8px;
+}
+
+.thank-you__title {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 24px;
+    text-transform: uppercase;
+    color: #212121;
+}
+
+.thank-you__text {
+    margin-bottom: 19px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    color: #A49561;
+}
+
+.thank-you__btn {
+    margin-bottom: 32px;
+}
+
+.thank-you__btn a {
+    color: white;
 }
 
 </style>
@@ -1097,8 +1125,20 @@ h6 {
             </div>
 
             <div class="step thank-you" id="step-5">
-                <div class="thank-you__text">
-                    ✅ <?php _e( 'Successfully created. Thank you.', 'appointments' ) ?>
+                <div class="thank-you__body">
+                    <img class="thank-you__success" src="<?php echo plugin_dir_url( APPOINTMENTS_ROOT . '/appointments.php' ) ?>/src/assets/public/img/success.svg" alt="">
+                    <div class="thank-you__title">
+                        <?php _e( 'Thank you!', 'appointments' ) ?>
+                    </div>
+                    <div class="thank-you__text">
+                        <?php _e( 'Your consultation successfully registered', 'appointments' ) ?>
+                    </div>
+                    <div class="thank-you__btn btn">
+                        <a href="<?php echo home_url() ?>">
+                            <?php _e( 'back to the main', 'appointments' ) ?>
+                        </a>
+                    </div>
+                    <img src="<?php echo wp_get_attachment_image_url( get_theme_mod( 'custom_logo' ) ) ?>" alt="">
                 </div>
             </div>
 
