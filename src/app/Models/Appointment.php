@@ -19,6 +19,7 @@ class Appointment extends Model
         'provider_id',
         'customer_id',
         'delete_token',
+        'ip',
     ];
 
     protected $casts = [
@@ -71,6 +72,22 @@ class Appointment extends Model
         $start = new DateTime( $this->start, get_timezone() );
 
         return $start->modify( "+{$this->service->duration} minutes" );
+    }
+
+    public static function canCreateWithIp( string $ip ): bool
+    {
+        $date = ( new DateTime( 'now', get_timezone() ) )
+            ->modify( '-1 month' )
+            ->format( 'Y-m-d H:i:s' );
+        $appointments = self::where( 'ip', $ip )
+            ->where( 'created_at', '>', $date )
+            ->get();
+
+        if ( $appointments->count() >= 3 ) {
+            return false;
+        }
+
+        return true;
     }
 
     protected static function booted(): void

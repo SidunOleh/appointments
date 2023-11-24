@@ -88,3 +88,10 @@ function logger( array $data ): void {
         FILE_APPEND
     );
 }
+
+/**
+ * Get ip
+ */
+function get_ip() {
+    return $_SERVER[ 'REMOTE_ADDR' ];
+}

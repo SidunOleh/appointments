@@ -113,7 +113,7 @@ class Activator
                 'appointments_appointments', 
                 function ( $table ) {
                     $table->increments( 'id' );
-                    $table->datetime( 'start' )->nullable();
+                    $table->datetime( 'start' );
                     $table->text( 'comment' )->nullable();
                     $table->boolean( 'pay_status' )->default( false );
                     $table->unsignedInteger( 'service_id' );
@@ -131,8 +131,9 @@ class Activator
                         ->references( 'id' )
                         ->on( 'appointments_customers' )
                         ->onDelete( 'cascade' ); 
-                    $table->string( 'delete_token' )->nullable();
+                    $table->string( 'delete_token' );
                     $table->string( 'google_calendar_event_id' )->nullable();
+                    $table->string( 'ip' );
                     $table->timestamps();
                     $table->index( [ 'provider_id', 'start', ] );
                 } 

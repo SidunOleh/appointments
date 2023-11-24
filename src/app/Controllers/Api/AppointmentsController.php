@@ -162,6 +162,10 @@ class AppointmentsController extends ApiController
 
     public function create( WP_REST_Request $req )
     {   
+        if ( ! Appointment::canCreateWithIp( get_ip() ) ) {
+            $this->sendError( [ 'message' => __( 'You can not make appointment.', 'appointments' ), ] );
+        }
+
         $customer = Customer::create( [
             'name' => $req[ 'name' ],
             'email' => $req[ 'email' ],
@@ -175,6 +179,7 @@ class AppointmentsController extends ApiController
             'provider_id' => $req[ 'provider_id' ],
             'customer_id' => $customer->id,
             'delete_token' => Appointment::deleteToken(),
+            'ip' => get_ip(),
         ] );
 
         $this->sendSuccess( $appointment->toArray() );

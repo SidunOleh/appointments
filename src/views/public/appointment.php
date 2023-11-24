@@ -1309,11 +1309,16 @@ async function sendForm(e) {
         method: 'POST',
         body: data,
     })
+    const resData = await res.json()
     if (res.status == 200) {
         step(5)
         form.reset()
     } else {
-        alert('Error. Try again.')
+        if (resData?.data?.message) {
+            alert(resData.data.message)
+        } else {
+            alert('Error. Try again.')
+        }
     }
     loading('.appointment-modal__body', false)
 }
