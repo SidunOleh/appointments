@@ -81,7 +81,9 @@ function get_timezone(): DateTimeZone {
  * Logger
  */
 function logger( array $data ): void {
-    $data = [ 'time' => date( 'Y-m-d H:i:s' ), ] + $data;
+    $time = ( new DateTime( 'now', get_timezone() ) )
+        ->format( 'Y-m-d H:i:s' );
+    $data = [ 'time' => $time, ] + $data;
     file_put_contents(
         APPOINTMENTS_ROOT . '/src/storage/logs/appointments.log',
         json_encode( $data ) . "\n",
