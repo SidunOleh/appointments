@@ -12,12 +12,12 @@ class ServicesController extends ApiController
     {
         $validateProviders = function ( $providersIds ) {
             if ( ! is_array( $providersIds ) ) {
-                $this->sendError( [ 'message' => __( 'Providers are invalid.' ), ] );
+                $this->sendError( [ 'message' => __( 'Providers are invalid.', 'appointments' ), ] );
             }
 
             $providers = Provider::whereIn( 'id', $providersIds )->get();
             if ( count( $providersIds ) != $providers->count() ) {
-                $this->sendError( [ 'message' => __( 'Providers not found.' ), ] );
+                $this->sendError( [ 'message' => __( 'Providers not found.', 'appointments' ), ] );
             }
 
             return true;
