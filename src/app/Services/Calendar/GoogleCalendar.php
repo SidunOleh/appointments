@@ -3,6 +3,7 @@
 namespace Appointments\Services\Calendar;
 
 use Appointments\Models\Appointment;
+use Exception;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
@@ -35,13 +36,19 @@ class GoogleCalendar
             ],
         ] );
 
-        return $this->calendar->events->insert( $calendarId, $event );
+        $googleEvent = $this->calendar->events->insert( $calendarId, $event );
+
+        return $googleEvent;
     }
 
     public function removeAppointment( string $eventId, string $calendarId = 'primary' ): bool
     {
-        $response = $this->calendar->events->delete( $calendarId, $eventId );
+        $res = $this->calendar->events->delete( $calendarId, $eventId );
 
-        return $response->getStatusCode() == 200;
+        if ( $res->getStatusCode() != 200 ) {
+            throw new Exception( $res->getBody()->getContents(), $res->getStatusCode() );
+        }
+
+        return true;
     }
 }
