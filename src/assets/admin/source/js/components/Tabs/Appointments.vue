@@ -122,7 +122,7 @@
             <template v-if="column.key === 'delete'">
                 <span
                     class="icon"
-                    :title="`Delete ${record.name}`"
+                    title="Delete appointment"
                     @click="deleteAppointment(record)">
                     ❌    
                 </span>
