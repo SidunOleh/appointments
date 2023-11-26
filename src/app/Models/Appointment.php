@@ -76,6 +76,14 @@ class Appointment extends Model
 
     public static function canCreateWithIp( string $ip ): bool
     {
+        $settings = get_appointemnts_option( 'settings', [] );
+        if ( 
+            ! isset( $settings[ 'enable_restrictions_for_ip' ] ) or 
+            $settings[ 'enable_restrictions_for_ip' ] == false
+        ) {
+            return true;
+        }
+
         $date = ( new DateTime( 'now', get_timezone() ) )
             ->modify( '-1 month' )
             ->format( 'Y-m-d H:i:s' );
@@ -83,7 +91,7 @@ class Appointment extends Model
             ->where( 'created_at', '>', $date )
             ->get();
 
-        if ( $appointments->count() >= 3 ) {
+        if ( $appointments->count() >= $settings[ 'max_appointments_for_ip' ] ) {
             return false;
         }
 

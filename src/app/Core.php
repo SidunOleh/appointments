@@ -6,6 +6,7 @@ use Appointments\Controllers\Actions\ActionsController;
 use Appointments\Controllers\Api\AppointmentsController;
 use Appointments\Controllers\Api\ProvidersController;
 use Appointments\Controllers\Api\ServicesController;
+use Appointments\Controllers\Api\SettingsController;
 use Appointments\Controllers\Api\SyncCredentialsController;
 use Appointments\Controllers\Api\WorkingDaysController;
 use Appointments\Controllers\Api\WorkingHoursController;
@@ -101,6 +102,7 @@ class Core
         ( new ServicesController )->registerRoutes();
         ( new AppointmentsController )->registerRoutes();
         ( new SyncCredentialsController )->registerRoutes();
+        ( new SettingsController )->registerRoutes();
     }
 
     private function actions()
