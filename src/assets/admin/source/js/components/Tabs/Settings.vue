@@ -48,7 +48,7 @@ export default {
         getSettings() {
             axios.get('/wp-json/appointments/v1/settings')
                 .then(res => {
-                    if (res.data.success) {
+                    if (res.data.success && res.data.data.length) {
                         this.settings = res.data.data
                     }
                 }).catch(errorHandler)
