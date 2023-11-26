@@ -41,14 +41,17 @@ export default {
     },
     data() {
         return {
-            settings: {},
+            settings: {
+                enable_restrictions_for_ip: false,
+                max_appointments_for_ip: 0,
+            },
         }
     },
     methods: {
         getSettings() {
             axios.get('/wp-json/appointments/v1/settings')
                 .then(res => {
-                    if (res.data.success && res.data.data.length) {
+                    if (res.data.success && !Array.isArray(res.data.data)) {
                         this.settings = res.data.data
                     }
                 }).catch(errorHandler)
@@ -73,7 +76,7 @@ export default {
 
 <style scoped>
 .setting {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .ant-input-number {
     width: 200px;
