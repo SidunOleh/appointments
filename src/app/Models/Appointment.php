@@ -78,6 +78,7 @@ class Appointment extends Model
     {
         $settings = get_appointemnts_option( 'settings', [] );
         if ( 
+            is_admin_req() or
             ! isset( $settings[ 'enable_restrictions_for_ip' ] ) or 
             $settings[ 'enable_restrictions_for_ip' ] == false
         ) {

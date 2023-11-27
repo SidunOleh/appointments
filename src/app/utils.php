@@ -97,3 +97,12 @@ function logger( array $data ): void {
 function get_ip() {
     return $_SERVER[ 'REMOTE_ADDR' ];
 }
+
+/**
+ * Is request from admin panel
+ */
+function is_admin_req(): bool {
+    $origin = $_SERVER[ 'HTTP_REFERER' ];
+
+    return preg_match( '/\/wp-admin\/admin\.php\?page=appointments/', $origin );
+}

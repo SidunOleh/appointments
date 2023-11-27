@@ -1,14 +1,25 @@
 <template>
 
+    <Divider 
+        orientation="left" 
+        orientation-margin="0px" 
+        style="font-size:20px;font-weight:700;margin-top:0px;">
+        Set default working hours
+    </Divider>
+
     <div class="setting" style="max-width:400px">
-        <h2 style="margin-top:0px;">Set default working hours</h2>
         <Hours
             v-model:hours="settings.default_hours"/>
     </div>
 
-    <div class="setting">
-        <h2>Sync with Google Calendar</h2>
+    <Divider 
+        orientation="left" 
+        orientation-margin="0px" 
+        style="font-size:20px;font-weight:700;">
+        Sync with Google Calendar
+    </Divider>
 
+    <div class="setting">
         <label for="service-account-jwt" class="title">
             Upload service account key(JSON)
         </label>
@@ -28,8 +39,14 @@
         </div>
     </div>
 
+    <Divider 
+        orientation="left" 
+        orientation-margin="0px" 
+        style="font-size:20px;font-weight:700;">
+        Restrictions for IP address
+    </Divider>
+
     <div class="setting">
-        <h2>Restrictions for IP address</h2>
         <Switch
             id="enable-restrictions-for-ip"
             style="margin: 0 0 10px 0;"
@@ -47,7 +64,7 @@
         </template>
     </div>
 
-    <Button @click="updateSettings">
+    <Button @click="updateSettings" :loading="loading">
         Update settings
     </Button>
 
@@ -57,7 +74,7 @@
 import {
     Switch, InputNumber,
     Button, Modal,
-    Upload, 
+    Upload, Divider,
 } from 'ant-design-vue'
 import axios from 'axios'
 import {errorHandler} from '../../utils.js'
@@ -66,10 +83,11 @@ export default {
     components: {
         Switch, InputNumber,
         Button, Hours,
-        Upload,
+        Upload, Divider,
     },
     data() {
         return {
+            loading: false,
             settings: {
                 default_hours: [],
                 service_account_jwt: '',
@@ -97,16 +115,21 @@ export default {
                 }).catch(errorHandler)
         },
         updateSettings() {
+            this.loading = true
             axios.post('/wp-json/appointments/v1/settings', {
                 _method: 'PUT',
                 settings: this.settings,
             }).then(res => {
                 this.getSettings()
+                setTimeout(() => this.loading = false, 250)
                 Modal.success({
                     title: 'Updated',
                     content: 'Successfully updated.',
                 })
-            }).catch(errorHandler)
+            }).catch(err => {
+                setTimeout(() => this.loading = false, 250)
+                errorHandler(err)
+            })
         },
         setServiceAccountJwt(file) {
             const reader = new FileReader()
@@ -129,10 +152,5 @@ export default {
 
 .ant-input-number {
     width: 200px;
-}
-
-h2 {
-    margin: 15px 0;
-    font-size: 20px;
 }
 </style>
