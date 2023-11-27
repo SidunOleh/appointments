@@ -16,7 +16,7 @@
             id="service-account-jwt"
             accept="application/JSON"
             maxCount="1"
-            :beforeUpload="(file) => {saveServiceAccountJwt(file);return false;}">
+            :beforeUpload="(file) => {setServiceAccountJwt(file);return false;}">
             <Button>
                 Select file
             </Button>
@@ -29,7 +29,7 @@
     </div>
 
     <div class="setting">
-        <h2>Enable restrictions for IP address</h2>
+        <h2>Restrictions for IP address</h2>
         <Switch
             id="enable-restrictions-for-ip"
             style="margin: 0 0 10px 0;"
@@ -101,13 +101,14 @@ export default {
                 _method: 'PUT',
                 settings: this.settings,
             }).then(res => {
+                this.getSettings()
                 Modal.success({
                     title: 'Updated',
                     content: 'Successfully updated.',
                 })
             }).catch(errorHandler)
         },
-        saveServiceAccountJwt(file) {
+        setServiceAccountJwt(file) {
             const reader = new FileReader()
             let fileContent = ''
             reader.onload = (e) => fileContent += e.target.result
