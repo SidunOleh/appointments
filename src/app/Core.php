@@ -7,9 +7,7 @@ use Appointments\Controllers\Api\AppointmentsController;
 use Appointments\Controllers\Api\ProvidersController;
 use Appointments\Controllers\Api\ServicesController;
 use Appointments\Controllers\Api\SettingsController;
-use Appointments\Controllers\Api\SyncCredentialsController;
 use Appointments\Controllers\Api\WorkingDaysController;
-use Appointments\Controllers\Api\WorkingHoursController;
 use Appointments\Pages\MainPage;
 use Appointments\Shortcodes\AppointmentShortcode;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -96,12 +94,10 @@ class Core
 
     public function api()
     {
-        ( new WorkingHoursController )->registerRoutes();
         ( new ProvidersController )->registerRoutes();
         ( new WorkingDaysController )->registerRoutes();
         ( new ServicesController )->registerRoutes();
         ( new AppointmentsController )->registerRoutes();
-        ( new SyncCredentialsController )->registerRoutes();
         ( new SettingsController )->registerRoutes();
     }
 

@@ -15,7 +15,11 @@ class DeleteFromGoogleCalendar
                 $appointment->provider->sync_google_calendar and
                 $appointment->google_calendar_event_id 
             ) {
-                ( new GoogleCalendar )->removeAppointment( 
+                $settings = get_appointemnts_option( 'settings', [] );
+                $serviceAccountJWT = json_decode( $settings[ 'service_account_jwt' ] ?? '', true );
+                
+                $calendar = new GoogleCalendar( $serviceAccountJWT );
+                $calendar->removeAppointment( 
                     $appointment->google_calendar_event_id, 
                     $appointment->provider->google_calendar_id
                 );

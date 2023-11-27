@@ -22,6 +22,14 @@ class SettingsController extends ApiController
                     'type' => 'object',
                     'required' => true,
                     'properties' => [
+                        'default_hours' => [
+                            'type' => 'array',
+                            'required' => true,
+                        ],
+                        'service_account_jwt' => [
+                            'type' => 'string',
+                            'required' => true,
+                        ],
                         'enable_restrictions_for_ip' => [
                             'type' => 'boolean',
                             'required' => true,

@@ -133,7 +133,8 @@ class WorkingDaysController extends ApiController
 
     public function createOrUpdate( WP_REST_Request $req )
     {
-        $workingHours = $req[ 'working_hours' ] ?? get_appointemnts_option( 'default_working_hours', [] );
+        $defaultHours = get_appointemnts_option( 'settings', [] )[ 'default_hours' ] ?? [];
+        $workingHours = $req[ 'working_hours' ] ?? $defaultHours;
 
         $workingDay = WorkingDay::updateOrCreate( [
             'date' => $req[ 'date' ],

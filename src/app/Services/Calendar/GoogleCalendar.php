@@ -13,10 +13,10 @@ class GoogleCalendar
 {
     private Google_Service_Calendar $calendar;
 
-    public function __construct() 
+    public function __construct( array $authConfig ) 
     {
         $client = new Google_Client();
-        $client->setAuthConfig( APPOINTMENTS_ROOT . '/src/storage/credentials/service-account-jwt.json' );
+        $client->setAuthConfig( $authConfig );
         $client->addScope( Google_Service_Calendar::CALENDAR );
         $this->calendar = new Google_Service_Calendar( $client );
     }

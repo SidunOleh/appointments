@@ -12,7 +12,11 @@ class SavedToGoogleCalendar
     {
         try {
             if ( $appointment->provider->sync_google_calendar ) {
-                $event = ( new GoogleCalendar )->addAppointment( 
+                $settings = get_appointemnts_option( 'settings', [] );
+                $serviceAccountJWT = json_decode( $settings[ 'service_account_jwt' ] ?? '', true );
+                
+                $calendar = new GoogleCalendar( $serviceAccountJWT );
+                $event = $calendar->addAppointment( 
                     $appointment, 
                     $appointment->provider->google_calendar_id
                 );
