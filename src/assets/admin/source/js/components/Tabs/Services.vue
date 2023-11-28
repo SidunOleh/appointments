@@ -6,7 +6,8 @@
         title="Create service"
         okText="Create"
         @ok="createService"
-        @cancel="createModal.show = false">
+        @cancel="createModal.show = false"
+        :okButtonProps="{loading: createModal.loading,}">
 
         <label for="create-name" class="title">
             Service name
@@ -106,7 +107,8 @@
         title="Edit service"
         okText="Edit"
         @ok="editService"
-        @cancel="editModal.show = false">
+        @cancel="editModal.show = false"
+        :okButtonProps="{loading: editModal.loading,}">
 
         <label for="name" class="title">
             Service name
@@ -312,6 +314,7 @@ export default {
             providers: [],
             createModal: {
                 show: false,
+                loading: false,
                 data: {
                     name: '',
                     duration: 0,
@@ -326,6 +329,7 @@ export default {
             },
             editModal: {
                 show: false,
+                loading: false,
                 service: {},
             },
         }
@@ -375,6 +379,7 @@ export default {
             }).catch(errorHandler)
         },
         createService() {
+            this.createModal.loading = true
             axios.post('/wp-json/appointments/v1/services', {
                 name: this.createModal.data.name,
                 duration: this.createModal.data.duration,
@@ -386,6 +391,7 @@ export default {
                 name_ru: this.createModal.data.name_ru,
                 description_ru: this.createModal.data.description_ru,
             }).then(res => {
+                this.createModal.loading = false
                 if (res.data.success) {
                     this.createModal.show = false
                     this.createModal.data.name = ''
@@ -398,7 +404,10 @@ export default {
                     this.createModal.data.description_ru = ''
                     this.getServices({current: this.table.current})
                 }
-            }).catch(errorHandler)
+            }).catch(err => {
+                this.createModal.loading = false
+                errorHandler(err)
+            })
         },
         openEditModal(service) {
             this.editModal.service = {...service}
@@ -409,6 +418,7 @@ export default {
             this.editModal.show = true
         },
         editService() {
+            this.editModal.loading = true
             axios.post(`/wp-json/appointments/v1/services/${this.editModal.service.id}`, {
                 name: this.editModal.service.name,
                 duration: this.editModal.service.duration,
@@ -421,6 +431,7 @@ export default {
                 description_ru: this.editModal.service.description_ru,
                 _method: 'PUT',
             }).then(res => {
+                this.editModal.loading = false
                 if (res.data.success) {
                     Modal.success({
                         title: 'Edited',
@@ -428,7 +439,10 @@ export default {
                     })
                     this.getServices()
                 }
-            }).catch(errorHandler)
+            }).catch(err => {
+                this.editModal.loading = false
+                errorHandler(err)
+            })
         },
         deleteService(service) {
             Modal.confirm({

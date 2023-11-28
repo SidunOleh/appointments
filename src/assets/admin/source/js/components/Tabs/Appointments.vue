@@ -7,7 +7,7 @@
         okText="Create"
         @ok="createAppointment"
         @cancel="createModal.show = false"
-        :class="{'loading': createModal.loading,}">
+        :okButtonProps="{loading: createModal.loading,}">
 
         <div class="title">
             Services

@@ -6,7 +6,8 @@
         title="Create provider"
         okText="Create"
         @ok="createProvider"
-        @cancel="createModal.show = false">
+        @cancel="createModal.show = false"
+        :okButtonProps="{loading: createModal.loading,}">
 
         <label for="create-name" class="title">
             Provider name
@@ -102,7 +103,8 @@
         title="Edit provider"
         okText="Edit"
         @ok="editProvider"
-        @cancel="editModal.show = false">
+        @cancel="editModal.show = false"
+        :okButtonProps="{loading: editModal.loading,}">
 
         <label for="edit-name" class="title">
             Provider name
@@ -326,6 +328,7 @@ export default {
             },
             createModal: {
                 show: false,
+                loading: false,
                 data: {
                     name: '',
                     email: '',
@@ -340,6 +343,7 @@ export default {
             },
             editModal: {
                 show: false,
+                loading: false,
                 provider: {},
             },
             calendarModal: {
@@ -375,6 +379,7 @@ export default {
             })
         },
         createProvider() {
+            this.createModal.loading = true
             axios.post('/wp-json/appointments/v1/providers', {
                 name: this.createModal.data.name,
                 email: this.createModal.data.email,
@@ -386,6 +391,7 @@ export default {
                 sync_google_calendar: this.createModal.data.sync_google_calendar,
                 google_calendar_id: this.createModal.data.google_calendar_id,
             }).then(res => {
+                this.createModal.loading = false
                 if (res.data.success) {
                     this.createModal.show = false
                     this.createModal.data.name = ''
@@ -399,13 +405,17 @@ export default {
                     this.createModal.data.google_calendar_id = ''
                     this.getProviders({current: this.table.current})
                 }
-            }).catch(errorHandler) 
+            }).catch(err => {
+                this.createModal.loading = false
+                errorHandler(err)
+            }) 
         },
         openEditModal(provider) {
             this.editModal.provider = {...provider}
             this.editModal.show = true
         },
         editProvider() {
+            this.editModal.loading = true
             axios.post(`/wp-json/appointments/v1/providers/${this.editModal.provider.id}`, {
                 name: this.editModal.provider.name,
                 email: this.editModal.provider.email,
@@ -418,6 +428,7 @@ export default {
                 google_calendar_id: this.editModal.provider.google_calendar_id,
                 _method: 'PUT',
             }).then(res => {
+                this.editModal.loading = false
                 if (res.data.success) {
                     Modal.success({
                         title: 'Edited',
@@ -425,7 +436,10 @@ export default {
                     })
                     this.getProviders()
                 }
-            }).catch(errorHandler) 
+            }).catch(err => {
+                this.editModal.loading = false
+                errorHandler(err)
+            }) 
         },
         deleteProvider(provider) {
             Modal.confirm({
