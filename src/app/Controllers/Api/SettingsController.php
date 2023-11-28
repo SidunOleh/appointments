@@ -8,6 +8,18 @@ class SettingsController extends ApiController
 {
     public function registerRoutes()
     {
+        $validateTimePeriod = function ( $value ) {
+            $isValid = in_array( $value, [
+                'all', 'year', 'month',
+                'week', 'day',
+            ] );
+            if ( ! $isValid ) {
+                $this->sendError( [ 'message' => __( 'Time period is invalid.', 'appointments' ), ] );
+            }
+
+            return true;
+        };
+
         register_rest_route( $this->namespace, '/settings', [
             'methods' => 'GET',
             'permission_callback' => permission_callback( 'manage_options' ),
@@ -37,6 +49,11 @@ class SettingsController extends ApiController
                         'max_appointments_for_ip' => [
                             'type' => 'integer',
                             'required' => true,
+                        ],
+                        'time_period' => [
+                            'type' => 'string',
+                            'required' => true,
+                            'validate_callback' => $validateTimePeriod,
                         ],
                     ],
                 ],

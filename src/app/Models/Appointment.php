@@ -77,6 +77,7 @@ class Appointment extends Model
     public static function canCreateWithIp( string $ip ): bool
     {
         $settings = get_appointemnts_option( 'settings', [] );
+
         if ( 
             is_admin_req() or
             ! isset( $settings[ 'enable_restrictions_for_ip' ] ) or 
@@ -85,12 +86,17 @@ class Appointment extends Model
             return true;
         }
 
-        $date = ( new DateTime( 'now', get_timezone() ) )
-            ->modify( '-1 month' )
-            ->format( 'Y-m-d H:i:s' );
-        $appointments = self::where( 'ip', $ip )
-            ->where( 'created_at', '>', $date )
-            ->get();
+        $period = $settings[ 'time_period' ] ?? 'all';
+        if ( $period == 'all' ) {
+            $appointments = self::where( 'ip', $ip )->get();
+        } else {
+            $date = ( new DateTime( 'now', get_timezone() ) )
+                ->modify( "-1 {$period}" )
+                ->format( 'Y-m-d H:i:s' );
+            $appointments = self::where( 'ip', $ip )
+                ->where( 'created_at', '>', $date )
+                ->get();
+        }
 
         if ( $appointments->count() >= $settings[ 'max_appointments_for_ip' ] ) {
             return false;

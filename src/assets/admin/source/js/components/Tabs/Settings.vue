@@ -54,13 +54,23 @@
 
         <template v-if="settings.enable_restrictions_for_ip">
             <label for="max-appointments-for-ip" class="title">
-                Max count appointments for month
+                Max count of appointments
             </label>
             <InputNumber
                 id="max-appointments-for-ip"
                 min="0"
                 defaultValue="0"
                 v-model:value="settings.max_appointments_for_ip"/>
+
+            <label for="max-appointments-for-ip" class="title">
+                Time period
+            </label>
+            <Select
+                style="width: 100%;"
+                id="time-period"
+                :options="timePeriods"
+                placeholder="Select time period"
+                v-model:value="settings.time_period"/>
         </template>
     </div>
 
@@ -75,6 +85,7 @@ import {
     Switch, InputNumber,
     Button, Modal,
     Upload, Divider,
+    Select,
 } from 'ant-design-vue'
 import axios from 'axios'
 import {errorHandler} from '../../utils.js'
@@ -84,15 +95,39 @@ export default {
         Switch, InputNumber,
         Button, Hours,
         Upload, Divider,
+        Select,
     },
     data() {
         return {
             loading: false,
+            timePeriods: [
+                {
+                    label: 'All time',
+                    value: 'all',
+                }, 
+                {
+                    label: 'Year',
+                    value: 'year',
+                },
+                {
+                    label: 'Month',
+                    value: 'month',
+                },
+                {
+                    label: 'Week',
+                    value: 'week',
+                },
+                {
+                    label: 'Day',
+                    value: 'day',
+                },
+            ],
             settings: {
                 default_hours: [],
                 service_account_jwt: '',
                 enable_restrictions_for_ip: false,
                 max_appointments_for_ip: 0,
+                time_period: 'all',
             },
         }
     },
@@ -150,7 +185,8 @@ export default {
     margin-bottom: 25px;
 }
 
-.ant-input-number {
-    width: 200px;
+.ant-input-number,
+.ant-select {
+    width: 200px !important;
 }
 </style>
